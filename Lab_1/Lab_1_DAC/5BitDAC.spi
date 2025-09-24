@@ -1,0 +1,32 @@
+*** SPICE deck for cell 5BitDAC{sch} from library Lab_1_DAC
+*** Created on Sun Sep 21, 2025 11:52:31
+*** Last revised on Sun Sep 21, 2025 20:24:17
+*** Written on Sun Sep 21, 2025 22:55:12 by Electric VLSI Design System, version 9.08
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Lab_1_DAC__SingleCell FROM CELL SingleCell{sch}
+.SUBCKT Lab_1_DAC__SingleCell bot in out
+Rresnwell@0 net@1 in 10k
+Rresnwell@1 out net@1 10k
+Rresnwell@2 out bot 10k
+.ENDS Lab_1_DAC__SingleCell
+
+.global gnd
+
+*** TOP LEVEL CELL: 5BitDAC{sch}
+Rresnwell@0 net@14 gnd 10k
+XSingleCe@2 net@11 b3 net@19 Lab_1_DAC__SingleCell
+XSingleCe@3 net@8 b2 net@11 Lab_1_DAC__SingleCell
+XSingleCe@4 net@13 b1 net@8 Lab_1_DAC__SingleCell
+XSingleCe@5 net@14 b0 net@13 Lab_1_DAC__SingleCell
+XSingleCe@6 net@19 b4 vout Lab_1_DAC__SingleCell
+
+* Spice Code nodes in cell cell '5BitDAC{sch}'
+v4 b4 0
+v3 b3 0
+v2 b2 0
+v1 b1 b0
+vin b0 0 DC 5
+.op
+.END

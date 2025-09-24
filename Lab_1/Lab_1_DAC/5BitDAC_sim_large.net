@@ -1,0 +1,35 @@
+*** SPICE deck for cell 5BitDAC_sim_large{sch} from library Lab_1_DAC
+*** Created on Sun Sep 21, 2025 12:42:05
+*** Last revised on Sun Sep 21, 2025 12:49:51
+*** Written on Wed Sep 24, 2025 11:04:42 by Electric VLSI Design System, version 9.08
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Lab_1_DAC__SingleCell FROM CELL SingleCell{sch}
+.SUBCKT Lab_1_DAC__SingleCell bot in out
+Rresnwell@0 net@1 in 10k
+Rresnwell@1 out net@1 10k
+Rresnwell@2 out bot 10k
+.ENDS Lab_1_DAC__SingleCell
+
+*** SUBCIRCUIT Lab_1_DAC__5BitDAC FROM CELL 5BitDAC{sch}
+.SUBCKT Lab_1_DAC__5BitDAC b0 b1 b2 b3 b4 vout
+** GLOBAL gnd
+Rresnwell@0 net@14 gnd 10k
+XSingleCe@2 net@11 b3 net@19 Lab_1_DAC__SingleCell
+XSingleCe@3 net@8 b2 net@11 Lab_1_DAC__SingleCell
+XSingleCe@4 net@13 b1 net@8 Lab_1_DAC__SingleCell
+XSingleCe@5 net@14 b0 net@13 Lab_1_DAC__SingleCell
+XSingleCe@6 net@19 b4 vout Lab_1_DAC__SingleCell
+.ENDS Lab_1_DAC__5BitDAC
+
+.global gnd
+
+*** TOP LEVEL CELL: 5BitDAC_sim_large{sch}
+Ccap@0 gnd vout 10p
+X_5BitDAC@0 gnd gnd gnd gnd vin vout Lab_1_DAC__5BitDAC
+
+* Spice Code nodes in cell cell '5BitDAC_sim_large{sch}'
+vin vin 0 pulse(0v 2v 1u 1f 1f 3u 6u)
+.tran 0 2.4u 0 100p
+.END
